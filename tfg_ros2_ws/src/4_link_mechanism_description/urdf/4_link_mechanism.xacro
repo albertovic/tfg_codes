@@ -1,0 +1,220 @@
+<?xml version="1.0" ?>
+<robot name="4_link_mechanism" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find 4_link_mechanism_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find 4_link_mechanism_description)/urdf/4_link_mechanism.trans" />
+<xacro:include filename="$(find 4_link_mechanism_description)/urdf/4_link_mechanism.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.0360306633219346 0.5963847482681972 0.04700297266298855" rpy="0 0 0"/>
+    <mass value="0.008081747101359745"/>
+    <inertia ixx="3e-05" iyy="0.0" izz="3e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find 4_link_mechanism_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find 4_link_mechanism_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="input_bar_1_1">
+  <inertial>
+    <origin xyz="-0.027484096297025952 -0.011013972790256177 0.015329729548726821" rpy="0 0 0"/>
+    <mass value="0.04065638844632588"/>
+    <inertia ixx="1.2e-05" iyy="4.1e-05" izz="3.1e-05" ixy="-0.0" iyz="0.0" ixz="1.6e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.036031 -0.701385 -0.047096" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find 4_link_mechanism_description)/meshes/input_bar_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.036031 -0.701385 -0.047096" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find 4_link_mechanism_description)/meshes/input_bar_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hook_to_slider_1">
+  <inertial>
+    <origin xyz="-0.005646043950731247 -2.9323806829406607e-06 0.003159970818231647" rpy="0 0 0"/>
+    <mass value="0.030364421078294613"/>
+    <inertia ixx="3e-06" iyy="1e-05" izz="7e-06" ixy="-0.0" iyz="0.0" ixz="3e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.114813 -0.690346 -0.090603" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find 4_link_mechanism_description)/meshes/hook_to_slider_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.114813 -0.690346 -0.090603" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find 4_link_mechanism_description)/meshes/hook_to_slider_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="input_bar_2_1">
+  <inertial>
+    <origin xyz="-0.03778827433181595 0.008998888858982312 0.0008200602239955002" rpy="0 0 0"/>
+    <mass value="0.04589766594578241"/>
+    <inertia ixx="3e-06" iyy="5.6e-05" izz="5.6e-05" ixy="-0.0" iyz="0.0" ixz="1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.03603 -0.491385 -0.04691" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find 4_link_mechanism_description)/meshes/input_bar_2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.03603 -0.491385 -0.04691" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find 4_link_mechanism_description)/meshes/input_bar_2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="ball_slider_1">
+  <inertial>
+    <origin xyz="2.996594225257443e-07 -1.3310900448537666e-07 2.1484172495200848e-07" rpy="0 0 0"/>
+    <mass value="0.0005547529027463973"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.128874 -0.690339 -0.098472" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find 4_link_mechanism_description)/meshes/ball_slider_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.128874 -0.690339 -0.098472" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find 4_link_mechanism_description)/meshes/ball_slider_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="attatchment_1">
+  <inertial>
+    <origin xyz="-0.6923209970745325 -0.2215303124677187 0.09089275266609358" rpy="0 0 0"/>
+    <mass value="0.12388314136856148"/>
+    <inertia ixx="0.000536" iyy="6e-05" izz="0.000479" ixy="-3e-06" iyz="-0.000118" ixz="-1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.563346 -0.819442 0.016787" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find 4_link_mechanism_description)/meshes/attatchment_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.563346 -0.819442 0.016787" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find 4_link_mechanism_description)/meshes/attatchment_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="fin_1">
+  <inertial>
+    <origin xyz="-0.005080127569664139 0.24293461866956223 -0.5387082912320053" rpy="0 0 0"/>
+    <mass value="6.3385428603672205"/>
+    <inertia ixx="0.046499" iyy="0.069369" izz="0.10773" ixy="-0.001981" iyz="-0.010511" ixz="0.00124"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.257843 -0.359279 -0.611252" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find 4_link_mechanism_description)/meshes/fin_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.257843 -0.359279 -0.611252" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find 4_link_mechanism_description)/meshes/fin_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="revolucion1" type="continuous">
+  <origin xyz="-0.036031 0.701385 0.047096" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="input_bar_1_1"/>
+  <axis xyz="-5e-06 1.0 0.000884"/>
+</joint>
+
+<joint name="input1_to_hook" type="prismatic">
+  <origin xyz="-0.078782 -0.011039 0.043507" rpy="0 0 0"/>
+  <parent link="input_bar_1_1"/>
+  <child link="hook_to_slider_1"/>
+  <axis xyz="0.872637 0.000436 -0.488369"/>
+  <limit upper="0.0185" lower="-0.018" effort="100" velocity="100"/>
+</joint>
+
+<joint name="revolucion2" type="continuous">
+  <origin xyz="-0.03603 0.491385 0.04691" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="input_bar_2_1"/>
+  <axis xyz="5e-06 -1.0 -0.000884"/>
+</joint>
+
+<joint name="input2_to_attatchment" type="prismatic">
+  <origin xyz="0.599376 0.328057 -0.063697" rpy="0 0 0"/>
+  <parent link="input_bar_2_1"/>
+  <child link="attatchment_1"/>
+  <axis xyz="-0.999735 -2.5e-05 0.023002"/>
+  <limit upper="0.0185" lower="-0.018" effort="100" velocity="100"/>
+</joint>
+
+<joint name="spherical_joint_1" type="continuous">
+  <origin xyz="-0.014061 -7e-06 0.007869" rpy="0 0 0"/>
+  <parent link="hook_to_slider_1"/>
+  <child link="ball_slider_1"/>
+  <axis xyz="-0.00582 -0.967179 -0.254029"/>
+</joint>
+
+<!-- <joint name="spherical_joint_pitch" type="continuous">
+  <origin xyz="-0.014061 -7e-06 0.007869" rpy="0 0 0"/>
+  <parent link="hook_to_slider_1"/>
+  <child link="ball_slider_1"/>
+  <axis xyz="0 1 0"/>
+</joint>
+
+<joint name="spherical_joint_yaw" type="continuous">
+  <origin xyz="-0.014061 -7e-06 0.007869" rpy="0 0 0"/>
+  <parent link="hook_to_slider_1"/>
+  <child link="ball_slider_1"/>
+  <axis xyz="0 0 1"/>
+</joint> -->
+
+<joint name="ball_slider_joint" type="prismatic">
+  <origin xyz="0.69222 0.129103 -0.115259" rpy="0 0 0"/>
+  <parent link="attatchment_1"/>
+  <child link="ball_slider_1"/>
+  <axis xyz="-0.00582 -0.967179 -0.254029"/>
+  <limit upper="1.0" lower="-1.0" effort="100" velocity="100"/>
+</joint>
+
+<joint name="fin_attatchment" type="fixed">
+  <origin xyz="-0.821189 -0.460163 0.628039" rpy="0 0 0"/>
+  <parent link="attatchment_1"/>
+  <child link="fin_1"/>
+  <axis xyz="-0.999735 -2.5e-05 0.023002"/>
+</joint>
+
+</robot>
