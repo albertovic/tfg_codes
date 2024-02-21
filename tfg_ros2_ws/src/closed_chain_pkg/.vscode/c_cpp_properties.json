@@ -1,0 +1,24 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/alberto/proyectos/robotica/ros2_ws/install/tutorial_interfaces/include/**",
+        "/home/alberto/proyectos/robotica/ros2_ws/install/rplidar_ros/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/alberto/tfg/tfg_codes/tfg_ros2_ws/src/closed_chain_pkg/include/**",
+        "include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
