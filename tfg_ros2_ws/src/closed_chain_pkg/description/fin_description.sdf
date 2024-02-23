@@ -1,0 +1,370 @@
+<sdf version="1.7">
+    <model name="fin_mechanism">
+
+      <link name="base_link">
+
+        <pose>0 0 0 0 0 0</pose>
+
+        <inertial>
+          <mass>0.008</mass>
+          <inertia>
+            <ixx>0.0028999008</ixx>
+            <ixy>1.43715286e-08</ixy>
+            <ixz>3.086010e-11</ixz>
+            <iyy>4.69018906e-06</iyy>
+            <iyz>-2.560048828e-06</iyz>
+            <izz>0.002899883</izz>
+          </inertia>
+        </inertial>
+
+        <visual name="base_link_visual">
+          <geometry>
+            <mesh>
+              <uri>meshes/base_link.stl</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.0 0.0 1.0 1</ambient>
+            <diffuse>0.0 0.0 1.0 1</diffuse>
+            <specular>0.0 0.0 1.0 1</specular>
+          </material>
+        </visual>
+
+        <collision name="base_link_collision">
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>meshes/base_link.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+      </link>
+
+      <link name="input_bar_1">
+
+        <pose>0.036031 -0.701385 -0.047096 0 0 0</pose>
+
+        <inertial>
+          <mass>0.04</mass>
+          <inertia>
+            <ixx>0.0010981736</ixx>
+            <ixy>-1.5086196289e-06</ixy>
+            <ixz>0.0014820546</ixz>
+            <iyy>0.0038157212</iyy>
+            <iyz>7.736248535e-07</iyz>
+            <izz>0.0029214714</izz>
+          </inertia>
+        </inertial>
+
+        <visual name="input_bar_1_visual">
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>meshes/input_bar_1_1.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.0 0.0 1.0 1</ambient>
+            <diffuse>0.0 0.0 1.0 1</diffuse>
+            <specular>0.0 0.0 1.0 1</specular>
+          </material>
+        </visual>
+
+        <collision name="input_bar_1_collision">
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>meshes/input_bar_1_1.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+      </link>
+
+      <link name="hook_to_slider">
+
+        <pose>0.114813 -0.690346 -0.090603 0 0 0</pose>
+
+        <inertial>
+          <mass>0.03036</mass>
+          <inertia>
+            <ixx>3.689685e-05</ixx>
+            <ixy>1.294863e-08</ixy>
+            <ixz>4.085262e-05</ixz>
+            <iyy>1.205141e-04</iyy>
+            <iyz>2.455685e-08</iyz>
+            <izz>8.702948e-05</izz>
+          </inertia>
+        </inertial>
+
+        <visual name="hook_to_slider_visual">
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>meshes/hook_to_slider_1.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.0 0.0 1.0 1</ambient>
+            <diffuse>0.0 0.0 1.0 1</diffuse>
+            <specular>0.0 0.0 1.0 1</specular>
+          </material>
+        </visual>
+
+        <collision name="hook_to_slider_collision">
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>meshes/hook_to_slider_1.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+      </link>
+
+      <link name="input_bar_2">
+
+        <pose>0.03603 -0.491385 -0.04691 0 0 0</pose>
+
+        <inertial>
+          <mass>0.046</mass>
+          <inertia>
+            <ixx>2.92583525e-04</ixx>
+            <ixy>-1.2548392e-07</ixy>
+            <ixz>1.08099488e-04</ixz>
+            <iyy>0.0052815956</iyy>
+            <iyz>6.40648987e-08</iyz>
+            <izz>0.005215771</izz>
+          </inertia>
+        </inertial>
+
+        <visual name="input_bar_2_visual">
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>meshes/input_bar_2_1.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.0 0.0 1.0 1</ambient>
+            <diffuse>0.0 0.0 1.0 1</diffuse>
+            <specular>0.0 0.0 1.0 1</specular>
+          </material>
+        </visual>
+
+        <collision name="input_bar_2_collision">
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>meshes/input_bar_2_1.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+      </link>
+
+      <link name="ball_slider">
+
+        <pose>0.128874 -0.690339 -0.098472 0 0 0</pose>
+
+        <inertial>
+          <mass>0.0005</mass>
+          <inertia>
+            <ixx>7.937935e-07</ixx>
+            <ixy>-1.889823e-10</ixy>
+            <ixz>4.325785e-10</ixz>
+            <iyy>1.0917079e-06</iyy>
+            <iyz>7.62782043e-08</iyz>
+            <izz>8.1397056e-07</izz>
+          </inertia>
+        </inertial>
+
+        <visual name="ball_slider_visual">
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>meshes/ball_slider_1.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.0 0.0 1.0 1</ambient>
+            <diffuse>0.0 0.0 1.0 1</diffuse>
+            <specular>0.0 0.0 1.0 1</specular>
+          </material>
+        </visual>
+
+        <collision name="ball_slider_collision">
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>meshes/ball_slider_1.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+      </link>
+
+      <link name="attatchment">
+
+        <pose>-0.563346 -0.819442 0.016787 0 0 0</pose>
+
+        <inertial>
+          <mass>0.124</mass>
+          <inertia>
+            <ixx>0.0503414464</ixx>
+            <ixy>-2.51359325e-04</ixy>
+            <ixz>-1.0930119e-04</ixz>
+            <iyy>0.005684428</iyy>
+            <iyz>-0.0110974984</iyz>
+            <izz>0.0450456256</izz>
+          </inertia>
+        </inertial>
+
+        <visual name="attatchment_visual">
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>meshes/attatchment_1.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.0 0.0 1.0 1</ambient>
+            <diffuse>0.0 0.0 1.0 1</diffuse>
+            <specular>0.0 0.0 1.0 1</specular>
+          </material>
+        </visual>
+
+        <collision name="attatchment_collision">
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>meshes/attatchment_1.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+      </link>
+
+      <link name="fin">
+
+        <pose>0.257843 -0.359279 -0.611252 0 0 0</pose>
+
+        <inertial>
+          <mass>6.3</mass>
+          <inertia>
+            <ixx>3.0110726144</ixx>
+            <ixy>-0.1290816896</ixy>
+            <ixz>0.080053376</ixz>
+            <iyy>4.4995039232</iyy>
+            <iyz>-0.6807791</iyz>
+            <izz>6.9837668352</izz>
+          </inertia>
+        </inertial>
+
+        <visual name="fin_visual">
+          <geometry>
+            <mesh>
+              <scale>0.01 0.01 0.01</scale>
+              <uri>meshes/fin_1.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.0 0.0 1.0 1</ambient>
+            <diffuse>0.0 0.0 1.0 1</diffuse>
+            <specular>0.0 0.0 1.0 1</specular>
+          </material>
+        </visual>
+
+        <collision name="fin_collision">
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>meshes/fin_1.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+      </link>
+
+      <joint name="revolucion1" type="continuous">
+        <parent>base_link</parent>
+        <child>input_bar_1</child>
+        <pose>-0.036031 0.701385 0.047096 0 0 0</pose>
+        <axis>
+          <xyz>-5e-06 1.0 0.000884</xyz>
+        </axis>
+      </joint>
+
+      <joint name="input1_to_hook" type="prismatic">
+        <parent>input_bar_1</parent>
+        <child>hook_to_slider</child>
+        <pose>-0.078782 -0.011039 0.043507 0 0 0</pose>
+        <axis>
+          <xyz>0.872637 0.000436 -0.488369</xyz>
+        </axis>
+        <limit>
+          <upper>0.0185</upper>
+          <lower>-0.018</lower>
+        </limit>
+        <!-- effort="100" velocity="100"/> -->
+      </joint>
+
+      <joint name="revolucion2" type="continuous">
+        <parent>base_link</parent>
+        <child>input_bar_2</child>
+        <pose>-0.03603 0.491385 0.04691 0 0 0</pose>
+        <axis>
+          <xyz>5e-06 -1.0 -0.000884</xyz>
+        </axis>
+      </joint>
+
+      <joint name="input2_to_attatchment" type="prismatic">
+        <parent>input_bar_2</parent>
+        <child>attatchment</child>
+        <pose>0.599376 0.328057 -0.063697 0 0 0</pose>
+        <axis>
+          <xyz>-0.999735 -2.5e-05 0.023002</xyz>
+        </axis>
+        <limit>
+          <upper>0.0185</upper>
+          <lower>-0.018</lower>
+        </limit>
+        <!-- effort="100" velocity="100" -->
+      </joint>
+
+      <joint name="spherical_joint" type="ball">
+        <parent>hook_to_slider</parent>
+        <child>ball_slider</child>
+        <pose>-0.014061 -7e-06 0.007869 0 0 0</pose>
+        <axis>
+          <xyz>-0.00582 -0.967179 -0.254029</xyz>
+        </axis>
+      </joint>
+
+      <joint name="ball_slider_joint" type="prismatic">
+        <parent>ball_slider</parent>
+        <child>attatchment</child>
+        <pose>0.69222 0.129103 -0.115259 0 0 0</pose>
+        <axis>
+          <xyz>-0.00582 -0.967179 -0.254029</xyz>
+        </axis>
+        <limit>
+          <upper>1.0</upper>
+          <lower>-1.0</lower>
+        </limit>
+        <!-- effort="100" velocity="100" -->
+      </joint>
+
+      <joint name="fin_attatchment" type="fixed">
+        <parent>attatchment</parent>
+        <child>fin</child>
+        <pose>-0.821189 -0.460163 0.628039 0 0 0</pose>
+        <axis>
+          <xyz>-0.999735 -2.5e-05 0.023002</xyz>
+        </axis>
+      </joint>
+
+    </model>
+</sdf>
