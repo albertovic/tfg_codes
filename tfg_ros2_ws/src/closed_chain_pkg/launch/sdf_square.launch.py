@@ -15,8 +15,8 @@ def generate_launch_description():
   # Constants for paths to different files and folders
   gazebo_models_path = 'models'
   package_name = 'closed_chain_pkg'
-  robot_name_in_model = 'fin_mechanism'
-  sdf_model_path = 'description/fin_description.sdf'
+  robot_name_in_model = 'closed_chain'
+  sdf_model_path = 'description/simple_closed_chain.sdf'
   world_file_path = 'worlds/neighborhood.world'
      
   # Pose where we want to spawn the robot
@@ -98,11 +98,10 @@ def generate_launch_description():
     executable='spawn_entity.py',
     arguments=['-entity', robot_name_in_model, 
                '-file', sdf_model,
-                  # '-x', spawn_x_val,
-                  # '-y', spawn_y_val,
-                  # '-z', spawn_z_val,
-                  # '-Y', spawn_yaw_val
-                  ],
+                  '-x', spawn_x_val,
+                  '-y', spawn_y_val,
+                  '-z', spawn_z_val,
+                  '-Y', spawn_yaw_val],
                   output='screen')
  
   # Create the launch description and populate

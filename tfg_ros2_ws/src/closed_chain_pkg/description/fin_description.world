@@ -1,5 +1,16 @@
-<sdf version="1.7">
+<?xml version="1.0"?>
+<sdf version="1.4">
+  <world name="fin_world">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
     <model name="fin_mechanism">
+
+      <pose relative_to='world'>0 0 0 0 0 0</pose>
 
       <link name="base_link">
 
@@ -20,7 +31,7 @@
         <visual name="base_link_visual">
           <geometry>
             <mesh>
-              <uri>meshes/base_link.stl</uri>
+              <uri>file://meshes/base_link.stl</uri>
               <scale>0.01 0.01 0.01</scale>
             </mesh>
           </geometry>
@@ -35,7 +46,7 @@
           <geometry>
             <mesh>
               <scale>0.001 0.001 0.001</scale>
-              <uri>meshes/base_link.stl</uri>
+              <uri>file://meshes/base_link.stl</uri>
             </mesh>
           </geometry>
         </collision>
@@ -62,7 +73,7 @@
           <geometry>
             <mesh>
               <scale>0.01 0.01 0.01</scale>
-              <uri>meshes/input_bar_1_1.stl</uri>
+              <uri>file://meshes/input_bar_1_1.stl</uri>
             </mesh>
           </geometry>
           <material>
@@ -76,7 +87,7 @@
           <geometry>
             <mesh>
               <scale>0.001 0.001 0.001</scale>
-              <uri>meshes/input_bar_1_1.stl</uri>
+              <uri>file://meshes/input_bar_1_1.stl</uri>
             </mesh>
           </geometry>
         </collision>
@@ -103,7 +114,7 @@
           <geometry>
             <mesh>
               <scale>0.01 0.01 0.01</scale>
-              <uri>meshes/hook_to_slider_1.stl</uri>
+              <uri>file://meshes/hook_to_slider_1.stl</uri>
             </mesh>
           </geometry>
           <material>
@@ -117,7 +128,7 @@
           <geometry>
             <mesh>
               <scale>0.001 0.001 0.001</scale>
-              <uri>meshes/hook_to_slider_1.stl</uri>
+              <uri>file://meshes/hook_to_slider_1.stl</uri>
             </mesh>
           </geometry>
         </collision>
@@ -144,7 +155,7 @@
           <geometry>
             <mesh>
               <scale>0.01 0.01 0.01</scale>
-              <uri>meshes/input_bar_2_1.stl</uri>
+              <uri>file://meshes/input_bar_2_1.stl</uri>
             </mesh>
           </geometry>
           <material>
@@ -158,7 +169,7 @@
           <geometry>
             <mesh>
               <scale>0.001 0.001 0.001</scale>
-              <uri>meshes/input_bar_2_1.stl</uri>
+              <uri>file://meshes/input_bar_2_1.stl</uri>
             </mesh>
           </geometry>
         </collision>
@@ -185,7 +196,7 @@
           <geometry>
             <mesh>
               <scale>0.01 0.01 0.01</scale>
-              <uri>meshes/ball_slider_1.stl</uri>
+              <uri>file://meshes/ball_slider_1.stl</uri>
             </mesh>
           </geometry>
           <material>
@@ -199,7 +210,7 @@
           <geometry>
             <mesh>
               <scale>0.001 0.001 0.001</scale>
-              <uri>meshes/ball_slider_1.stl</uri>
+              <uri>file://meshes/ball_slider_1.stl</uri>
             </mesh>
           </geometry>
         </collision>
@@ -226,7 +237,7 @@
           <geometry>
             <mesh>
               <scale>0.01 0.01 0.01</scale>
-              <uri>meshes/attatchment_1.stl</uri>
+              <uri>file://meshes/attatchment_1.stl</uri>
             </mesh>
           </geometry>
           <material>
@@ -240,7 +251,7 @@
           <geometry>
             <mesh>
               <scale>0.001 0.001 0.001</scale>
-              <uri>meshes/attatchment_1.stl</uri>
+              <uri>file://meshes/attatchment_1.stl</uri>
             </mesh>
           </geometry>
         </collision>
@@ -267,7 +278,7 @@
           <geometry>
             <mesh>
               <scale>0.01 0.01 0.01</scale>
-              <uri>meshes/fin_1.stl</uri>
+              <uri>file://meshes/fin_1.stl</uri>
             </mesh>
           </geometry>
           <material>
@@ -281,7 +292,7 @@
           <geometry>
             <mesh>
               <scale>0.001 0.001 0.001</scale>
-              <uri>meshes/fin_1.stl</uri>
+              <uri>file://meshes/fin_1.stl</uri>
             </mesh>
           </geometry>
         </collision>
@@ -367,4 +378,5 @@
       </joint>
 
     </model>
+  </world>
 </sdf>
