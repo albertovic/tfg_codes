@@ -116,8 +116,10 @@
             </link>
 
             <joint name='input1_to_hook' type='prismatic'>
-                <pose relative_to='input_bar_1_1'>-0.078782000000000005 -0.011039
-                    0.043506999999999997 0 0 0</pose>
+                <!-- <pose relative_to='input_bar_1_1'>-0.078782000000000005 -0.011039
+                    0.043506999999999997 0 0 0</pose> -->
+                <pose relative_to='input_bar_1_1'>-0.065 -0.011039 0.03589595339 0 0 0</pose>
+
                 <parent>input_bar_1_1</parent>
                 <child>hook_to_slider_1</child>
                 <axis>
