@@ -139,7 +139,7 @@
             </joint>
 
             <link name='hook_to_slider_1'>
-                <self_collide>0</self_collide>
+                <self_collide>1</self_collide>
                 <pose relative_to='input1_to_hook'>-0.015 0 0.0085 0 0 0</pose>
                 <inertial>
                     <pose>-0.0056460439507312471 -2.9323806829406611e-06 0.0031599708182316472 0 0 0</pose>
@@ -262,7 +262,7 @@
 
 
             <link name='attatchment_1'>
-                <self_collide>0</self_collide>
+                <self_collide>1</self_collide>
                 <pose relative_to='input2_to_attatchment'>0.68 0.3191 -0.064 0 0 0</pose>
                 <inertial>
                     <pose>-0.82370137434792867 -0.21731084830848821 0.089360652771222043 0 0 0</pose>
@@ -328,6 +328,7 @@
                     0.0078689999999999993 0 0 0</pose>
                 <parent>hook_to_slider_1</parent>
                 <child>ball_slider_1</child>
+                <!-- This should keep commented and deleted when everything works fine -->
                 <!-- <axis>
                     <xyz>-0.0058199999999999997 -0.96717900000000001 -0.254029</xyz>
                     <limit>
@@ -342,11 +343,13 @@
             </joint>
 
             <joint name='ball_to_attatchment' type='prismatic'>
-                <pose relative_to='ball_slider'>0.5 0 0 0 0 0</pose>
-                <parent>ball_slider</parent>
-                <child>attatchment_1</child>
+                <pose relative_to='ball_slider'>0 0 0 0 0 0</pose>
+                <parent>base_link</parent>
+                <child>ball_slider_1</child>
                 <axis>
-                    <xyz>0 0 0</xyz>
+                    <!-- The angle I am looking for is in the ZY plane -->
+                    <!-- The angle has been set by eyesihgt. -->
+                    <xyz>0 0.5 0.13</xyz>
                     <limit>
                         <lower>-2</lower>
                         <upper>2</upper>
@@ -361,7 +364,7 @@
             </joint>
 
             <link name='ball_slider_1'>
-                <self_collide>0</self_collide>
+                <self_collide>1</self_collide>
                 <pose relative_to='spherical_joint_1'>0 0 0 0 0 0</pose>
                 <inertial>
                     <pose>2.9965942252574429e-07 -1.3310900448537671e-07 2.1484172495200851e-07 0 0
