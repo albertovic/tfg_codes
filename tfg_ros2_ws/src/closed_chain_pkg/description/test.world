@@ -265,8 +265,11 @@
                 <self_collide>1</self_collide>
                 <pose relative_to='input2_to_attatchment'>0.68 0.3191 -0.064 0 0 0</pose>
                 <inertial>
-                    <pose>-0.82370137434792867 -0.21731084830848821 0.089360652771222043 0 0 0</pose>
+                    <!-- Inertia position should be fine-tuned -->
+                    <pose>-0.85 -0.21731084830848821 0.089360652771222043 0 0 -0.065</pose>
                     <mass>6.462426001735782</mass>
+
+                    <!-- This is the inertia matrix calculated with MeshLab -->
                     <inertia>
                         <ixx>0.047037545185524443</ixx>
                         <ixy>-0.001913982569610839</ixy>
@@ -275,6 +278,17 @@
                         <iyz>-0.01062818348767175</iyz>
                         <izz>0.1103913635450926</izz>
                     </inertia>
+
+
+                    <!-- This is the old inertia matrix -->
+                    <!-- <inertia>
+                        <ixx>0.047037545185524443</ixx>
+                        <ixy>-0.001913982569610839</ixy>
+                        <ixz>0.0012135764642877691</ixz>
+                        <iyy>0.07160941131564158</iyy>
+                        <iyz>-0.01062818348767175</iyz>
+                        <izz>0.1103913635450926</izz>
+                    </inertia> -->
                 </inertial>
                 <collision name='attatchment_1_collision'>
                     <pose>-0.56334600000000001 -0.819442 0.016787 0 0 0</pose>
@@ -286,7 +300,7 @@
                     </geometry>
                 </collision>
                 <collision name='attatchment_1_fixed_joint_lump__fin_1_collision_1'>
-                    <pose>-0.5633459999999999 -0.819442 0.016787 0 0 0</pose>
+                    <pose>-0.5673 -0.819442 0.016 0 0.089 0</pose>
                     <geometry>
                         <mesh>
                             <scale>0.001 0.001 0.001</scale>
@@ -308,7 +322,7 @@
                     </material>
                 </visual>
                 <visual name='attatchment_1_fixed_joint_lump__fin_1_visual_1'>
-                    <pose>-0.5633459999999999 -0.819442 0.016787 0 0 0</pose>
+                    <pose>-0.5673 -0.819442 0.016 0 0.089 0</pose>
                     <geometry>
                         <mesh>
                             <scale>0.001 0.001 0.001</scale>
@@ -404,12 +418,12 @@
             </link>
 
 
-            <!-- <frame name='fin_attatchment' attached_to='attatchment_1'>
+            <frame name='fin_attatchment' attached_to='attatchment_1'>
                 <pose>-0.82118899999999995 -0.46016299999999999 0.62803900000000001 0 0 0</pose>
             </frame>
             <frame name='fin_1' attached_to='fin_attatchment'>
                 <pose>0 0 0 0 0 0</pose>
-            </frame> -->
+            </frame>
 
         </model>
     </world>
