@@ -73,9 +73,10 @@
             </joint>
 
             <link name='input_bar_1_1'>
-                <self_collide>0</self_collide>
+                <self_collide>1</self_collide>
                 <!-- Adjusted the Y axis angle -->
-                <pose relative_to='revolucion1'>0 0 0 0 -0.033 0</pose>
+                <!-- Modify Y axis angle here! -->
+                <pose relative_to='revolucion1'>0 0 0 0 0.014 0</pose>
                 <inertial>
                     <!-- <pose>-0.027484096297025949 -0.01101397279025618 0.015329729548726819 0 0
                     0</pose> -->
@@ -119,7 +120,7 @@
             <joint name='input1_to_hook' type='prismatic'>
                 <!-- <pose relative_to='input_bar_1_1'>-0.078782000000000005 -0.011039
                     0.043506999999999997 0 0 0</pose> -->
-                <pose relative_to='input_bar_1_1'>-0.071 -0.011039 0.03920942602 0 0 0</pose>
+                <pose relative_to='input_bar_1_1'>-0.0629 -0.011039 0.03473623798 0 0 0</pose>
 
                 <parent>input_bar_1_1</parent>
                 <child>hook_to_slider_1</child>
@@ -195,7 +196,7 @@
             </joint>
 
             <link name='input_bar_2_1'>
-                <self_collide>0</self_collide>
+                <self_collide>1</self_collide>
                 <pose relative_to='revolucion2'>0 0 0 0 0 0</pose>
                 <inertial>
                     <pose>-0.037788274331815953 0.0089988888589823124 0.00082006022399550016 0 0 0</pose>
@@ -210,7 +211,7 @@
                     </inertia>
                 </inertial>
                 <collision name='input_bar_2_1_collision'>
-                    <pose>0.03603 -0.49138500000000002 -0.04691 0 0 0</pose>
+                    <pose>0.03603 -0.49138500000000002 -0.04691 0 0.0276 0</pose>
                     <geometry>
                         <mesh>
                             <scale>0.001 0.001 0.001</scale>
@@ -219,7 +220,7 @@
                     </geometry>
                 </collision>
                 <visual name='input_bar_2_1_visual'>
-                    <pose>0.03603 -0.49138500000000002 -0.04691 0 0 0</pose>
+                    <pose>0.03603 -0.49138500000000002 -0.04691 0 0.0276 0</pose>
                     <geometry>
                         <mesh>
                             <scale>0.001 0.001 0.001</scale>
@@ -234,14 +235,7 @@
                 </visual>
             </link>
 
-
-            <joint name='input2_to_attatchment' type='prismatic'>
-                <!-- <pose relative_to='input_bar_2_1'>0.59937600000000002 0.32805699999999999
-                    -0.063697000000000004 0 0 0</pose> -->
-                <!-- Position modified so that it is centered in the input_bar_2
-                    The joint a should be kept like this. If the parent and child are interchanged, the 
-                    stl goes crazy.
-                -->
+            <joint name='input2_to_attatchment_prism' type='prismatic'>
                 <pose relative_to='input_bar_2_1'>-0.09 0.00895 0.00105 0 0 0</pose>
                 <parent>input_bar_2_1</parent>
                 <child>attatchment_1</child>
@@ -260,10 +254,27 @@
                 </axis>
             </joint>
 
+            <joint name='input2_to_attatchment_rev' type='revolute'>
+                <pose relative_to='input_bar_2_1'>-0.09 0.00895 0.00105 0 0 0</pose>
+                <parent>input_bar_2_1</parent>
+                <child>attatchment_1</child>
+                <axis>
+                    <xyz>1 0 0</xyz>
+                    <limit>
+                        <lower>-inf</lower>
+                        <upper>inf</upper>
+                    </limit>
+                    <dynamics>
+                        <spring_reference>0</spring_reference>
+                        <spring_stiffness>0</spring_stiffness>
+                    </dynamics>
+                </axis>
+            </joint>
+
 
             <link name='attatchment_1'>
                 <self_collide>1</self_collide>
-                <pose relative_to='input2_to_attatchment'>0.68 0.3191 -0.064 0 0 0</pose>
+                <pose relative_to='input2_to_attatchment_rev'>0.6907 0.3191 -0.064 0 0 0</pose>
                 <inertial>
                     <!-- Inertia position should be fine-tuned -->
                     <pose>-0.85 -0.21731084830848821 0.089360652771222043 0 0 -0.065</pose>
@@ -300,7 +311,7 @@
                     </geometry>
                 </collision>
                 <collision name='attatchment_1_fixed_joint_lump__fin_1_collision_1'>
-                    <pose>-0.5673 -0.819442 0.016 0 0.089 0</pose>
+                    <pose>-0.565 -0.819442 0.016 -0.0012 0.033 0</pose>
                     <geometry>
                         <mesh>
                             <scale>0.001 0.001 0.001</scale>
@@ -322,7 +333,7 @@
                     </material>
                 </visual>
                 <visual name='attatchment_1_fixed_joint_lump__fin_1_visual_1'>
-                    <pose>-0.5673 -0.819442 0.016 0 0.089 0</pose>
+                    <pose>-0.565 -0.819442 0.016 -0.0012 0.033 0</pose>
                     <geometry>
                         <mesh>
                             <scale>0.001 0.001 0.001</scale>
@@ -342,18 +353,6 @@
                     0.0078689999999999993 0 0 0</pose>
                 <parent>hook_to_slider_1</parent>
                 <child>ball_slider_1</child>
-                <!-- This should keep commented and deleted when everything works fine -->
-                <!-- <axis>
-                    <xyz>-0.0058199999999999997 -0.96717900000000001 -0.254029</xyz>
-                    <limit>
-                        <lower>-inf</lower>
-                        <upper>inf</upper>
-                    </limit>
-                    <dynamics>
-                        <spring_reference>0</spring_reference>
-                        <spring_stiffness>0</spring_stiffness>
-                    </dynamics>
-                </axis> -->
             </joint>
 
             <joint name='ball_to_attatchment' type='prismatic'>
