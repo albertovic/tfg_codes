@@ -4,6 +4,7 @@
     <!-- Check if the mass value can be increased so that the physics aren't so slow -->
     <!-- COLORS: RED = X    GREEN = Y   BLUE = Z -->
     <world name="fin_world">
+        
         <include>
             <uri>model://ground_plane</uri>
         </include>
@@ -12,7 +13,7 @@
         </include>
 
         <model name="fin_mechanism">
-
+            <plugin name="model_push" filename="libmodel_push.so"/>
             <pose relative_to='world'>0 0 0 0 0 0</pose>
 
             <link name='base_link'>
