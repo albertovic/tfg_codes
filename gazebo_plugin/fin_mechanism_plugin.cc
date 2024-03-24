@@ -37,9 +37,9 @@ namespace gazebo
       // Apply a small force to the model. This way the gravity is still working
       // this->baseLink->AddForce(ignition::math::Vector3d(100, 0, 0));
 
-      std::cerr << this->rev1->GetName() << " position is: " << this->rev1->GetSpringReferencePosition(0) << std::endl;
-      std::cerr << this->rev2->GetName() << " position is: " << this->rev2->GetSpringReferencePosition(0) << std::endl;
-      std::cerr << this->rev2_2->GetName() << " position is: " << this->rev2_2->GetSpringReferencePosition(0) << std::endl;
+      std::cerr << this->rev1->GetName() << " position is: " << this->rev1->Position(0) << std::endl;
+      std::cerr << this->rev2->GetName() << " position is: " << this->rev2->Position(0) << std::endl;
+      std::cerr << this->rev2_2->GetName() << " position is: " << this->rev2_2->Position(0) << std::endl;
     }
 
     // Pointer to the model

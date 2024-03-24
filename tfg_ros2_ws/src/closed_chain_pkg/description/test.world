@@ -125,10 +125,10 @@
                         <lower>-inf</lower>
                         <upper>inf</upper>
                     </limit>
-                    <!-- <dynamics>
+                    <dynamics>
                         <spring_reference>0</spring_reference>
                         <spring_stiffness>1</spring_stiffness>
-                    </dynamics> -->
+                    </dynamics>
                 </axis>
             </joint>
 
