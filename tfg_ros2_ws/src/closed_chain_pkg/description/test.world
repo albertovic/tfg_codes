@@ -14,7 +14,7 @@
 
         <model name="fin_mechanism">
 
-            <!-- <plugin name="fin_mechanism_plugin" filename="libfin_mechanism_plugin.so"/> -->
+            <plugin name="fin_mechanism_plugin" filename="libfin_mechanism_plugin.so"/>
 
             <pose relative_to='world'>0 0 0 0 0 0</pose>
 
@@ -125,10 +125,10 @@
                         <lower>-inf</lower>
                         <upper>inf</upper>
                     </limit>
-                    <dynamics>
+                    <!-- <dynamics>
                         <spring_reference>0</spring_reference>
-                        <spring_stiffness>0</spring_stiffness>
-                    </dynamics>
+                        <spring_stiffness>1</spring_stiffness>
+                    </dynamics> -->
                 </axis>
             </joint>
 
@@ -253,7 +253,7 @@
 
             <link name='input_bar_2_1'>
                 <self_collide>0</self_collide>
-                <pose relative_to='revolucion2'>0 0 0 0 0 0</pose>
+                <pose relative_to='revolucion2'>-0.0013 0 -0.001 0 0 0</pose>
                 <inertial>
                     <pose>-0.037788274331815953 0.0089988888589823124 0.00082006022399550016 0 0 0</pose>
                     <mass>0.045897665945782408</mass>
@@ -291,15 +291,55 @@
                 </visual>
             </link>
 
-            <joint name='input2_to_attachment_prism' type='prismatic'>
+            <link name='slider'>
+                <self_collide>1</self_collide>
+                <pose relative_to='input_bar_2_1'>0 0 0 0 0 0</pose>
+                <inertial>
+                    <pose>-0.05 0.0089988888589823124 0 0 0 0</pose>
+                    <mass>0.05</mass>
+                    <inertia>
+                        <ixx>0.000005806274375</ixx>
+                        <ixy>0.00000000015134215</ixy>
+                        <ixz>-0.00000071932523438</ixz>
+                        <iyy>0.00008838612</iyy>
+                        <iyz>-0.00000000171910919</iyz>
+                        <izz>0.00008837906</izz>
+                    </inertia>
+                </inertial>
+                <collision name='slider_collision'>
+                    <pose>0.03608 -0.49137 -0.04697 0 0.0288 0</pose>
+                    <geometry>
+                        <mesh>
+                            <scale>0.001 0.001 0.001</scale>
+                            <uri>file://meshes/slider.stl</uri>
+                        </mesh>
+                    </geometry>
+                </collision>
+                <visual name='slider_visual'>
+                    <pose>0.03608 -0.49137 -0.04697 0 0.0288 0</pose>
+                    <geometry>
+                        <mesh>
+                            <scale>0.001 0.001 0.001</scale>
+                            <uri>file://meshes/slider.stl</uri>
+                        </mesh>
+                    </geometry>
+                    <material>
+                        <ambient>1.0 0.0 0.0 1</ambient>
+                        <diffuse>1.0 0.0 0.0 1</diffuse>
+                        <specular>1.0 0.0 0.0 1</specular>
+                    </material>
+                </visual>
+            </link>
+
+            <joint name='slider_joint' type='prismatic'>
                 <pose relative_to='input_bar_2_1'>-0.09 0.00895 0.00105 0 0 0</pose>
                 <parent>input_bar_2_1</parent>
-                <child>attachment_1</child>
+                <child>slider</child>
                 <axis>
                     <xyz>-0.99973500000000004 -2.5000000000000001e-05 0.023002000000000002</xyz>
                     <limit>
-                        <lower>-0.03</lower>
-                        <upper>0</upper>
+                        <lower>0</lower>
+                        <upper>0.02</upper>
                         <effort>100</effort>
                         <velocity>100</velocity>
                     </limit>
@@ -312,7 +352,7 @@
 
             <joint name='input2_to_attachment_rev' type='revolute'>
                 <pose relative_to='input_bar_2_1'>-0.09 0.00895 0.00105 0 0 0</pose>
-                <parent>input_bar_2_1</parent>
+                <parent>slider</parent>
                 <child>attachment_1</child>
                 <axis>
                     <xyz>1 0 0</xyz>
@@ -330,13 +370,13 @@
 
             <link name='attachment_1'>
                 <self_collide>1</self_collide>
-                <pose relative_to='input2_to_attachment_prism'>0.6907 0.3191 -0.064 0 0 0</pose>
+                <pose relative_to='slider_joint'>0.6907 0.3191 -0.064 0 0 0</pose>
                 <inertial>
-                    <!-- Inertia position should be fine-tuned -->
+                    Inertia position should be fine-tuned
                     <pose>-0.85 -0.21731084830848821 0.089360652771222043 0 0 -0.065</pose>
                     <mass>6.462426001735782</mass>
 
-                    <!-- This is the inertia matrix calculated with MeshLab -->
+                    This is the inertia matrix calculated with MeshLab
                     <inertia>
                         <ixx>0.047037545185524443</ixx>
                         <ixy>-0.001913982569610839</ixy>
@@ -406,8 +446,8 @@
                 <parent>attachment_1</parent>
                 <child>ball_slider_1</child>
                 <axis>
-                    <!-- The angle I am looking for is in the ZY plane 
-                    The angle has been set by eyesihgt.  -->
+                    The angle I am looking for is in the ZY plane 
+                    The angle has been set by eyesihgt. 
                     <xyz>0 0.5 0.13</xyz>
                     <limit>
                         <lower>-2</lower>
