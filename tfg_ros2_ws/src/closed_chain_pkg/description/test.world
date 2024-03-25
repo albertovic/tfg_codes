@@ -14,7 +14,17 @@
 
         <model name="fin_mechanism">
 
-            <plugin name="fin_mechanism_plugin" filename="libfin_mechanism_plugin.so"/>
+            <plugin name="fin_mechanism_plugin" filename="libfin_mechanism_plugin.so">
+                <proportional1>100.0</proportional1>
+                <integral1>0.0</integral1>
+                <derivative1>0.0</derivative1>
+                <target1>0.0</target1>
+
+                <proportional2>200.0</proportional2>
+                <integral2>0.0</integral2>
+                <derivative2>0.0</derivative2>
+                <target2>0.5</target2>
+            </plugin>/>
 
             <pose relative_to='world'>0 0 0 0 0 0</pose>
 
@@ -127,7 +137,7 @@
                     </limit>
                     <dynamics>
                         <spring_reference>0</spring_reference>
-                        <spring_stiffness>1</spring_stiffness>
+                        <spring_stiffness>0</spring_stiffness>
                     </dynamics>
                 </axis>
             </joint>
@@ -239,7 +249,7 @@
                 <parent>base_link</parent>
                 <child>input_bar_2_1</child>
                 <axis>
-                    <xyz>5.0000000000000004e-06 -1 -0.00088400000000000002</xyz>
+                    <xyz>5.0000000000000004e-06 1 -0.00088400000000000002</xyz>
                     <limit>
                         <lower>-inf</lower>
                         <upper>inf</upper>
