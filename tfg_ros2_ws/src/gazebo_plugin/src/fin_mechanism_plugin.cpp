@@ -4,15 +4,28 @@
 #include <gazebo-11/gazebo/common/common.hh>
 #include <ignition/math6/ignition/math/Vector3.hh>
 #include <thread>
-#include "rclcpp/rclcpp.h"
+#include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 
+// class MinimalSubscriber : public rclcpp::Node
+// {
+//   public:
+//     MinimalSubscriber()
+//     : Node("minimal_subscriber")
+//     {
+//       subscription_ = this->create_subscription<std_msgs::msg::String>(
+//       "topic", 10, std::bind(&MinimalSubscriber::topic_callback, this, _1));
+//     }
 
-// class MinimalPublisher : public rclcpp::Node
+//   private:
+//     void topic_callback(const std_msgs::msg::String::SharedPtr msg) const
+//     {
+//       RCLCPP_INFO(this->get_logger(), "I heard: '%s'", msg->data.c_str());
+//     }
+//     rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscription_;
+// };
 
-
-namespace gazebo
-{
+namespace gazebo{
   class ModelPush : public ModelPlugin
   {
     public: void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
