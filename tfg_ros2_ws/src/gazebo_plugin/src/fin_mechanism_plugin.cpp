@@ -125,10 +125,12 @@ namespace gazebo
             // Apply a small force to the model. This way the gravity is still working
             // this->baseLink->AddForce(ignition::math::Vector3d(100, 0, 0));
 
-            // std::system("clear");
-            // std::cout << this->rev1->GetName() << " position is: " << this->rev1->Position(0) << std::endl;
-            // std::cout << this->rev2->GetName() << " position is: " << this->rev2->Position(0) << std::endl;
-
+            if (show_positions){
+                std::system("clear");
+                std::cout << this->rev1->GetName() << " position is: " << this->rev1->Position(0) << std::endl;
+                std::cout << this->rev2->GetName() << " position is: " << this->rev2->Position(0) << std::endl;
+            }
+            
             fd_set readfds;
             FD_ZERO(&readfds);
             FD_SET(this->clientSocket, &readfds);
@@ -141,29 +143,23 @@ namespace gazebo
 
             if (ready > 0 && FD_ISSET(this->clientSocket, &readfds)) {
                 recv(this->clientSocket, this->buffer, sizeof(this->buffer), 0);
-                // int received = recv(this->clientSocket, this->buffer, sizeof(this->buffer), 0);
-                std::cout << "El buffer contiene: " << buffer << std::endl;
 
                 if (buffer[0] == 't'){
                     int i = 2;
                     int j = 0;
 
-                    char t1[1024] = {0};
-                    char t2[1024] = {0};
+                    char t1[5] = {0};
+                    char t2[5] = {0};
 
-                    std::cout << "Buffer antes del while t1: " << buffer[i] << std::endl;
                     while(buffer[i] != ' '){
-                        std::cout << "Inside t1 while loop." << std::endl;
                         t1[j] = buffer[i];
                         i++;
                         j++;
                     }
                     i++;
                     j = 0;
-                    std::cout << "El buffer i tiene el valor: " << buffer[i] << std::endl;
 
                     while(buffer[i] != '\0'){
-                        std::cout << "Inside t2 while loop." << std::endl;
                         t2[j] = buffer[i];
                         i++;
                         j++;
@@ -172,19 +168,19 @@ namespace gazebo
                     std::cout << t1 << std::endl;
                     std::cout << t2 << std::endl;
                     
-                    double d_t1 = atof(t1);
-
-                    std::cout << "El valor de t1 es: " << d_t1 << std::endl;
+                    double double_t1 = atof(t1);
+                    double double_t2 = atof(t2);
 
                     std::cerr << this->model->GetJointController()->SetPositionTarget(
-                        this->rev1->GetScopedName(), atof(t1));
+                        this->rev1->GetScopedName(), double_t1);
                     
                     std::cerr << this->model->GetJointController()->SetPositionTarget(
-                        this->rev2->GetScopedName(), atof(t2));
+                        this->rev2->GetScopedName(), double_t2);
                 }
-                
+                else if (buffer[0] == 's'){
+                    show_positions = !show_positions;
+                }
             }
-            // std::cout << "El comando es: " << this->buffer;
         }
 
     private:
@@ -209,6 +205,9 @@ namespace gazebo
         int serverSocket;
         int clientSocket;
         char buffer[1024] = {0};
+
+        // Commands
+        bool show_positions = false;
     };
 
     // Register this plugin with the simulator
