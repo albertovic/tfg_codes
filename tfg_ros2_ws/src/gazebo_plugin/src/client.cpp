@@ -37,19 +37,23 @@ int main()
     while (true){
         cout << "Escriba a continuación el comando: ";
         cin.getline(buffer, sizeof(buffer));
-        // cin >> buffer;
         transform(buffer, buffer + strlen(buffer), lower_buffer, ::tolower);
         if (buffer[0] == 'h'){
             cout << "--- Manual de comandos ---" << endl;
-            cout << " c                  Para limpiar la pantalla." << endl;
-            cout << " s                  Para mostrar la posición de cada iteración. Al mandarlo de nuevo se desactiva." << endl;
-            cout << " t <pos1> <pos2>    Para introducir nuevas posiciones." << endl;
+            cout << " c                   Para limpiar la pantalla." << endl;
+            cout << " p 1 <p1> <i1> <d1>  Para introducir los parámetros del nuevo PID 1" << endl;
+            cout << " p 2 <p2> <i2> <d2>  Para introducir los parámetros del nuevo PID 2" << endl;
+            cout << " s                   Para mostrar la posición de cada iteración." << endl;
+            cout << "                     Al mandarlo de nuevo se desactiva." << endl;
+            cout << " t <pos1> <pos2>     Para introducir nuevas posiciones." << endl;
         }
         else if (buffer[0] == 'c'){
             std::system("clear");
         }
-
-        send(clientSocket, lower_buffer, strlen(lower_buffer), 0);
+        else if(buffer[0] != 'c' && buffer[0] != 'p' && buffer[0] != 's' && buffer[0] != 't' && buffer[0] != 'h')
+            cout << "Por favor, escriba un comando válido." << endl;
+        else
+            send(clientSocket, lower_buffer, strlen(lower_buffer), 0);
     }
   
     // closing socket 

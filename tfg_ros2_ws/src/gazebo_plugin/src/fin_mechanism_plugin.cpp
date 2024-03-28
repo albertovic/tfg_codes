@@ -154,61 +154,52 @@ namespace gazebo
             {
                 recv(this->clientSocket, this->buffer, sizeof(this->buffer), 0);
 
-                if (buffer[0] == 't')
-                {
-                    // int i = 2;
-                    // int j = 0;
+                switch (buffer[0]){
+                    case 't':
+                    {
+                        std::vector<double> mensaje_div = dividirMensaje(buffer);
 
-                    // char t1[5] = {0};
-                    // char t2[5] = {0};
+                        int pid1_ok = this->model->GetJointController()->SetPositionTarget(
+                            this->rev1->GetScopedName(), mensaje_div[0]);
 
-                    // while (buffer[i] != ' ')
-                    // {
-                    //     t1[j] = buffer[i];
-                    //     i++;
-                    //     j++;
-                    // }
-                    // i++;
-                    // j = 0;
+                        int pid2_ok = this->model->GetJointController()->SetPositionTarget(
+                            this->rev2->GetScopedName(), mensaje_div[1]);
 
-                    // while (buffer[i] != '\0')
-                    // {
-                    //     t2[j] = buffer[i];
-                    //     i++;
-                    //     j++;
-                    // }
-
-                    // std::cout << t1 << std::endl;
-                    // std::cout << t2 << std::endl;
-
-                    // double double_t1 = atof(t1);
-                    // double double_t2 = atof(t2);
-
-                    std::vector<double> mensaje_div = dividirMensaje(buffer);
-
-                    std::cout << mensaje_div[0] << mensaje_div[1] << std::endl;
-
-                    int pid1_ok = this->model->GetJointController()->SetPositionTarget(
-                        this->rev1->GetScopedName(), mensaje_div[0]);
-
-                    int pid2_ok = this->model->GetJointController()->SetPositionTarget(
-                        this->rev2->GetScopedName(), mensaje_div[1]);
-                    
-                    if((pid1_ok == 1) && (pid2_ok == 1)){
-                        std::cout << "Se han establecido los target de los PID correctamente." << std::endl;
-                        std::cout << "Los valores son: " << std::endl;
-                        std::cout << "  PID 1: "  << mensaje_div[0] << std::endl;
-                        std::cout << "  PID 2: "  << mensaje_div[1] << std::endl;
+                        if ((pid1_ok == 1) && (pid2_ok == 1))
+                        {
+                            std::cout << "Se han establecido los target de los PID correctamente." << std::endl;
+                            std::cout << "Los valores son: " << std::endl;
+                            std::cout << "  PID 1: " << mensaje_div[0] << std::endl;
+                            std::cout << "  PID 2: " << mensaje_div[1] << std::endl;
+                        }
+                        else
+                        {
+                            std::cerr << "Error al establecer los valores de los PID." << std::endl;
+                            std::cerr << "  El PID 1 ha devuelto: " << pid1_ok << std::endl;
+                            std::cerr << "  El PID 2 ha devuelto: " << pid2_ok << std::endl;
+                        }
                     }
-                    else{
-                        std::cerr << "Error al establecer los valores de los PID." << std::endl;
-                        std::cerr << "  El PID 1 ha devuelto: "  << pid1_ok << std::endl;
-                        std::cerr << "  El PID 2 ha devuelto: "  << pid2_ok << std::endl;
-                    }
-                }
-                else if (buffer[0] == 's')
-                {
-                    show_positions = !show_positions;
+                        break;
+                    case 's':
+                        show_positions = !show_positions;
+                        break;
+                    case 'p':
+                    {
+                        std::vector<double> mensaje_div = dividirMensaje(buffer);
+                        if(mensaje_div[0] == 1){
+                            this->pid1 = common::PID(mensaje_div[1], mensaje_div[2], mensaje_div[3]);
+                        }
+                        else if(mensaje_div[1] == 2){
+                        this->pid2 = common::PID(mensaje_div[3], mensaje_div[4], mensaje_div[5]);
+                        }
+                        else{
+                            std::cout << "Por favor, escriba un número válido para seleccionar el PID." << std::endl;
+                        }
+                    }                       
+                        break;
+                    default:
+                        std::cout << "Por favor, escriba un comando válido" << std::endl;
+                        break;
                 }
             }
         }
@@ -232,31 +223,31 @@ namespace gazebo
             return resultado;
         }
 
-private:
-// Pointer to the model
-physics::ModelPtr model;
+    private:
+        // Pointer to the model
+        physics::ModelPtr model;
 
-// Pointer to the base link
-physics::LinkPtr baseLink;
+        // Pointer to the base link
+        physics::LinkPtr baseLink;
 
-// Pointers to the joints
-physics::JointPtr rev1;
-physics::JointPtr rev2;
+        // Pointers to the joints
+        physics::JointPtr rev1;
+        physics::JointPtr rev2;
 
-/// A PID controller for the joint.
-common::PID pid1;
-common::PID pid2;
+        /// A PID controller for the joint.
+        common::PID pid1;
+        common::PID pid2;
 
-// Pointer to the update event connection
-event::ConnectionPtr updateConnection;
+        // Pointer to the update event connection
+        event::ConnectionPtr updateConnection;
 
-// Socket
-int serverSocket;
-int clientSocket;
-char buffer[1024] = {0};
+        // Socket
+        int serverSocket;
+        int clientSocket;
+        char buffer[1024] = {0};
 
-// Commands
-bool show_positions = false;
+        // Commands
+        bool show_positions = false;
     };
 
     // Register this plugin with the simulator
