@@ -7,6 +7,9 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 #include "gazebo_ros/node.hpp"
+#include <iostream>
+#include <vector>
+#include <sstream>
 
 // Includes for the socket
 #include <stdio.h>
@@ -38,9 +41,12 @@ namespace gazebo
 
             listen(this->serverSocket, 5);
 
-            if ((this->clientSocket = accept(this->serverSocket, nullptr, nullptr)) > 0){
+            if ((this->clientSocket = accept(this->serverSocket, nullptr, nullptr)) > 0)
+            {
                 std::cout << "La conexión con el cliente ha sido establecida con éxito." << std::endl;
-            }else{
+            }
+            else
+            {
                 std::cerr << "Atención. Error en la conexión con el cliente." << std::endl;
                 std::cerr << "Vuelva a ejecutar el programa." << std::endl;
                 exit(0);
@@ -90,9 +96,9 @@ namespace gazebo
             this->rev1 = model->GetJoints()[2];
             this->rev2 = model->GetJoints()[4];
 
-            std::cerr << "\nThe plugin is attached to model[" << this->model->GetName() << "]\n";
+            std::cerr << "\nSe ha iniciado el plugin con el modelo [" << this->model->GetName() << "]\n";
 
-            std::cerr << "The links are called: " << this->rev1->GetName() << " and " << this->rev2->GetName() << std::endl;
+            std::cerr << "Los joints de entrada se llaman: " << this->rev1->GetName() << " y " << this->rev2->GetName() << std::endl;
 
             // Listen to the update event. This event is broadcast every
             // simulation iteration.
@@ -105,13 +111,13 @@ namespace gazebo
             this->model->GetJointController()->SetPositionPID(
                 this->rev1->GetScopedName(), this->pid1);
 
-            std::cerr << this->model->GetJointController()->SetPositionTarget(
+            this->model->GetJointController()->SetPositionTarget(
                 this->rev1->GetScopedName(), target1);
 
             this->model->GetJointController()->SetPositionPID(
                 this->rev1->GetScopedName(), this->pid2);
 
-            std::cerr << this->model->GetJointController()->SetPositionTarget(
+            this->model->GetJointController()->SetPositionTarget(
                 this->rev2->GetScopedName(), target2);
         }
 
@@ -119,95 +125,138 @@ namespace gazebo
     public:
         void OnUpdate()
         {
-            // Apply a small linear velocity to the model.
-            // this->model->SetLinearVel(ignition::math::Vector3d(.3, 0, 0));
-
-            // Apply a small force to the model. This way the gravity is still working
-            // this->baseLink->AddForce(ignition::math::Vector3d(100, 0, 0));
-
-            if (show_positions){
+            // Activa o desactiva la impresión de las posiciones en pantalla de forma constante
+            if (show_positions)
+            {
                 std::system("clear");
                 std::cout << this->rev1->GetName() << " position is: " << this->rev1->Position(0) << std::endl;
                 std::cout << this->rev2->GetName() << " position is: " << this->rev2->Position(0) << std::endl;
             }
-            
+
+            // Configuración del socket
             fd_set readfds;
             FD_ZERO(&readfds);
             FD_SET(this->clientSocket, &readfds);
-    
+
             struct timeval timeout;
             timeout.tv_sec = 0;
             timeout.tv_usec = 0;
 
+            /*
+             Comprobar si hay algún mensaje listo para ser recivido. 
+             Básicamente se comprueba si ha habido cambios en el fichero del socket.
+             Esto se utiliza para evitar una llamada bloqueante (recv) sin que haya mensajes que recibir, lo que pararía
+             la simulación.
+            */ 
             int ready = select(this->clientSocket + 1, &readfds, NULL, NULL, &timeout);
 
-            if (ready > 0 && FD_ISSET(this->clientSocket, &readfds)) {
+            if (ready > 0 && FD_ISSET(this->clientSocket, &readfds))
+            {
                 recv(this->clientSocket, this->buffer, sizeof(this->buffer), 0);
 
-                if (buffer[0] == 't'){
-                    int i = 2;
-                    int j = 0;
+                if (buffer[0] == 't')
+                {
+                    // int i = 2;
+                    // int j = 0;
 
-                    char t1[5] = {0};
-                    char t2[5] = {0};
+                    // char t1[5] = {0};
+                    // char t2[5] = {0};
 
-                    while(buffer[i] != ' '){
-                        t1[j] = buffer[i];
-                        i++;
-                        j++;
+                    // while (buffer[i] != ' ')
+                    // {
+                    //     t1[j] = buffer[i];
+                    //     i++;
+                    //     j++;
+                    // }
+                    // i++;
+                    // j = 0;
+
+                    // while (buffer[i] != '\0')
+                    // {
+                    //     t2[j] = buffer[i];
+                    //     i++;
+                    //     j++;
+                    // }
+
+                    // std::cout << t1 << std::endl;
+                    // std::cout << t2 << std::endl;
+
+                    // double double_t1 = atof(t1);
+                    // double double_t2 = atof(t2);
+
+                    std::vector<double> mensaje_div = dividirMensaje(buffer);
+
+                    std::cout << mensaje_div[0] << mensaje_div[1] << std::endl;
+
+                    int pid1_ok = this->model->GetJointController()->SetPositionTarget(
+                        this->rev1->GetScopedName(), mensaje_div[0]);
+
+                    int pid2_ok = this->model->GetJointController()->SetPositionTarget(
+                        this->rev2->GetScopedName(), mensaje_div[1]);
+                    
+                    if((pid1_ok == 1) && (pid2_ok == 1)){
+                        std::cout << "Se han establecido los target de los PID correctamente." << std::endl;
+                        std::cout << "Los valores son: " << std::endl;
+                        std::cout << "  PID 1: "  << mensaje_div[0] << std::endl;
+                        std::cout << "  PID 2: "  << mensaje_div[1] << std::endl;
                     }
-                    i++;
-                    j = 0;
-
-                    while(buffer[i] != '\0'){
-                        t2[j] = buffer[i];
-                        i++;
-                        j++;
+                    else{
+                        std::cerr << "Error al establecer los valores de los PID." << std::endl;
+                        std::cerr << "  El PID 1 ha devuelto: "  << pid1_ok << std::endl;
+                        std::cerr << "  El PID 2 ha devuelto: "  << pid2_ok << std::endl;
                     }
-                    
-                    std::cout << t1 << std::endl;
-                    std::cout << t2 << std::endl;
-                    
-                    double double_t1 = atof(t1);
-                    double double_t2 = atof(t2);
-
-                    std::cerr << this->model->GetJointController()->SetPositionTarget(
-                        this->rev1->GetScopedName(), double_t1);
-                    
-                    std::cerr << this->model->GetJointController()->SetPositionTarget(
-                        this->rev2->GetScopedName(), double_t2);
                 }
-                else if (buffer[0] == 's'){
+                else if (buffer[0] == 's')
+                {
                     show_positions = !show_positions;
                 }
             }
         }
 
-    private:
-        // Pointer to the model
-        physics::ModelPtr model;
+        std::vector<double> dividirMensaje(const char *mensaje)
+        {
+            std::vector<double> resultado;
+            std::stringstream ss(mensaje); // Creamos un stringstream con el mensaje
 
-        // Pointer to the base link
-        physics::LinkPtr baseLink;
+            std::string parte;
+            while (ss >> parte)
+            { // Leemos cada parte del stringstream
+                double valor;
+                if (std::istringstream(parte) >> valor)
+                { // Intentamos convertir la parte en un double
+                    // Si la conversión es exitosa, agregamos el valor al vector resultado
+                    resultado.push_back(valor);
+                }
+            }
 
-        // Pointers to the joints
-        physics::JointPtr rev1;
-        physics::JointPtr rev2;
+            return resultado;
+        }
 
-        /// A PID controller for the joint.
-        common::PID pid1;
-        common::PID pid2;
+private:
+// Pointer to the model
+physics::ModelPtr model;
 
-        // Pointer to the update event connection
-        event::ConnectionPtr updateConnection;
+// Pointer to the base link
+physics::LinkPtr baseLink;
 
-        // Socket
-        int serverSocket;
-        int clientSocket;
-        char buffer[1024] = {0};
+// Pointers to the joints
+physics::JointPtr rev1;
+physics::JointPtr rev2;
 
-        // Commands
-        bool show_positions = false;
+/// A PID controller for the joint.
+common::PID pid1;
+common::PID pid2;
+
+// Pointer to the update event connection
+event::ConnectionPtr updateConnection;
+
+// Socket
+int serverSocket;
+int clientSocket;
+char buffer[1024] = {0};
+
+// Commands
+bool show_positions = false;
     };
 
     // Register this plugin with the simulator

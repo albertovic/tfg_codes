@@ -40,15 +40,15 @@ int main()
         // cin >> buffer;
         transform(buffer, buffer + strlen(buffer), lower_buffer, ::tolower);
         if (buffer[0] == 'h'){
-            cout << "--- Manual de comandos ---";
-            cout << " t <pos1> <pos2>    Para introducir nuevas posiciones." << endl;
+            cout << "--- Manual de comandos ---" << endl;
+            cout << " c                  Para limpiar la pantalla." << endl;
             cout << " s                  Para mostrar la posición de cada iteración. Al mandarlo de nuevo se desactiva." << endl;
-            
+            cout << " t <pos1> <pos2>    Para introducir nuevas posiciones." << endl;
         }
-        // for (int i = 0; i < sizeof(buffer); i++){
-        //     lower_buffer[i] = tolower(buffer[i]);
-        // }
-        // char* message = lower_buffer;
+        else if (buffer[0] == 'c'){
+            std::system("clear");
+        }
+
         send(clientSocket, lower_buffer, strlen(lower_buffer), 0);
     }
   
