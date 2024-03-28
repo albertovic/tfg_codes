@@ -190,7 +190,7 @@ namespace gazebo
                             this->pid1 = common::PID(mensaje_div[1], mensaje_div[2], mensaje_div[3]);
                         }
                         else if(mensaje_div[1] == 2){
-                        this->pid2 = common::PID(mensaje_div[3], mensaje_div[4], mensaje_div[5]);
+                            this->pid2 = common::PID(mensaje_div[3], mensaje_div[4], mensaje_div[5]);
                         }
                         else{
                             std::cout << "Por favor, escriba un número válido para seleccionar el PID." << std::endl;
