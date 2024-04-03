@@ -147,7 +147,7 @@
                 <self_collide>1</self_collide>
                 <!-- Adjusted the Y axis angle -->
                 <!-- Modify Y axis angle here! -->
-                <pose relative_to='revolucion1'>0 0 0 0 0.014 0</pose>
+                <pose relative_to='revolucion1'>0 0 0 0 0.008 0</pose>
                 <inertial>
                     <pose relative_to='input_bar_1_1'>-0.027484096297025949 -0.01101397279025618
                         0.015329729548726819 0 0 0</pose>
@@ -187,7 +187,7 @@
             </link>
 
             <joint name='input1_to_hook' type='prismatic'>
-                <pose relative_to='input_bar_1_1'>-0.0629 -0.011039 0.03473623798 0 0 0</pose>
+                <pose relative_to='input_bar_1_1'>-0.064 -0.011039 0.0353437 0 0 0</pose>
 
                 <parent>input_bar_1_1</parent>
                 <child>hook_to_slider_1</child>
