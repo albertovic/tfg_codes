@@ -181,21 +181,11 @@ namespace gazebo
                     }
                         break;
                     case 's':
-                        show_positions = !show_positions;
+                        show_positions = !show_positions;                       
                         break;
-                    case 'p':
-                    {
-                        std::vector<double> mensaje_div = dividirMensaje(buffer);
-                        if(mensaje_div[0] == 1){
-                            this->pid1 = common::PID(mensaje_div[1], mensaje_div[2], mensaje_div[3]);
-                        }
-                        else if(mensaje_div[1] == 2){
-                            this->pid2 = common::PID(mensaje_div[3], mensaje_div[4], mensaje_div[5]);
-                        }
-                        else{
-                            std::cout << "Por favor, escriba un número válido para seleccionar el PID." << std::endl;
-                        }
-                    }                       
+                    case '0':
+                        std::cout << "El socket se ha cerrado." << std::endl;
+                        exit(0);
                         break;
                     default:
                         std::cout << "Por favor, escriba un comando válido" << std::endl;

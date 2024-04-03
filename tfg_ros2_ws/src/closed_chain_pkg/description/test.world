@@ -14,17 +14,17 @@
 
         <model name="fin_mechanism">
 
-            <plugin name="fin_mechanism_plugin" filename="libfin_mechanism_plugin.so">
-                <proportional1>100.0</proportional1>
+            <!-- <plugin name="fin_mechanism_plugin" filename="libfin_mechanism_plugin.so">
+                <proportional1>50.0</proportional1>
                 <integral1>0.0</integral1>
-                <derivative1>0.0</derivative1>
+                <derivative1>1.0</derivative1>
                 <target1>0.0</target1>
 
                 <proportional2>200.0</proportional2>
-                <integral2>0.0</integral2>
-                <derivative2>0.0</derivative2>
-                <target2>0.5</target2>
-            </plugin>/>
+                <integral2>0.1</integral2>
+                <derivative2>1.0</derivative2>
+                <target2>0.0</target2>
+            </plugin>/> -->
 
             <pose relative_to='world'>0 0 0 0 0 0</pose>
 
@@ -49,7 +49,7 @@
                 </visual>
 
                 <inertial>
-                    <mass>120</mass>
+                    <mass>400</mass>
                 </inertial>
             </link>
 
@@ -134,6 +134,7 @@
                     <limit>
                         <lower>-inf</lower>
                         <upper>inf</upper>
+                        <effort>170</effort>
                     </limit>
                     <dynamics>
                         <spring_reference>0</spring_reference>
@@ -193,10 +194,9 @@
                 <axis>
                     <xyz>0.872637 0.00043600000000000003 -0.488369</xyz>
                     <limit>
-                        <lower>-0.036</lower>
+                        <lower>-0.02</lower>
                         <upper>0</upper>
-                        <effort>100</effort>
-                        <velocity>100</velocity>
+                        <effort>10000</effort>
                     </limit>
                     <dynamics>
                         <spring_reference>0</spring_reference>
@@ -209,7 +209,7 @@
                 <self_collide>1</self_collide>
                 <pose relative_to='input1_to_hook'>-0.015 0 0.0085 0 0 0</pose>
                 <inertial>
-                    <pose>-0.0056460439507312471 -2.9323806829406611e-06 0.0031599708182316472 0 0 0</pose>
+                    <pose>-0.0056460439507312471 -2.93238068294f 06611e-06 0.0031599708182316472 0 0 0</pose>
                     <mass>0.030364421078294609</mass>
                     <inertia>
                         <ixx>3.0000000000000001e-06</ixx>
@@ -249,14 +249,15 @@
                 <parent>base_link</parent>
                 <child>input_bar_2_1</child>
                 <axis>
-                    <xyz>5.0000000000000004e-06 1 -0.00088400000000000002</xyz>
+                    <xyz>0 -1 0</xyz>
                     <limit>
                         <lower>-inf</lower>
                         <upper>inf</upper>
+                        <effort>200</effort>
                     </limit>
                     <dynamics>
                         <spring_reference>0</spring_reference>
-                        <spring_stiffness>0</spring_stiffness>
+                        <spring_stiffness>10</spring_stiffness>
                     </dynamics>
                 </axis>
             </joint>
@@ -266,7 +267,7 @@
                 <pose relative_to='revolucion2'>-0.0013 0 -0.001 0 0 0</pose>
                 <inertial>
                     <pose>-0.037788274331815953 0.0089988888589823124 0.00082006022399550016 0 0 0</pose>
-                    <mass>0.045897665945782408</mass>
+                    <mass>0.025</mass>
                     <inertia>
                         <ixx>3.0000000000000001e-06</ixx>
                         <ixy>0</ixy>
@@ -305,8 +306,8 @@
                 <self_collide>1</self_collide>
                 <pose relative_to='input_bar_2_1'>0 0 0 0 0 0</pose>
                 <inertial>
-                    <pose>-0.05 0.0089988888589823124 0 0 0 0</pose>
-                    <mass>0.05</mass>
+                    <pose>-0.075 0.0089988888589823124 0.002 0 0 0</pose>
+                    <mass>0.02</mass>
                     <inertia>
                         <ixx>0.000005806274375</ixx>
                         <ixy>0.00000000015134215</ixy>
@@ -380,13 +381,12 @@
 
             <link name='attachment_1'>
                 <self_collide>1</self_collide>
-                <pose relative_to='slider_joint'>0.6907 0.3191 -0.064 0 0 0</pose>
+                <pose relative_to='slider_joint'>0.6907 0.3191 -0.061 0 0 0</pose>
                 <inertial>
-                    Inertia position should be fine-tuned
                     <pose>-0.85 -0.21731084830848821 0.089360652771222043 0 0 -0.065</pose>
-                    <mass>6.462426001735782</mass>
-
-                    This is the inertia matrix calculated with MeshLab
+                    <!-- <mass>6.462426001735782</mass> -->
+                    <!-- Valor de masa cambiado para observar comportamiento -->
+                    <mass>1.5</mass>
                     <inertia>
                         <ixx>0.047037545185524443</ixx>
                         <ixy>-0.001913982569610839</ixy>
@@ -416,7 +416,7 @@
                     </geometry>
                 </collision>
                 <visual name='attachment_1_visual'>
-                    <pose>-0.56334600000000001 -0.819442 0.016787 0 0 0</pose>
+                    <pose>-0.5646 -0.819442 0.0128 0 0.03 0</pose>
                     <geometry>
                         <mesh>
                             <scale>0.001 0.001 0.001</scale>
@@ -429,7 +429,8 @@
                     </material>
                 </visual>
                 <visual name='attachment_1_fixed_joint_lump__fin_1_visual_1'>
-                    <pose>-0.565 -0.819442 0.016 -0.0012 0.033 0</pose>
+                    <pose>-0.56452 -0.819442 0.01246 0 0.032 0</pose>
+                    <!-- <pose>-0.565 -0.819442 0.016 -0.0012 0.033 0</pose> -->
                     <geometry>
                         <mesh>
                             <scale>0.001 0.001 0.001</scale>
@@ -456,18 +457,16 @@
                 <parent>attachment_1</parent>
                 <child>ball_slider_1</child>
                 <axis>
-                    The angle I am looking for is in the ZY plane 
-                    The angle has been set by eyesihgt. 
-                    <xyz>0 0.5 0.13</xyz>
+                    <xyz>0 -0.5 -0.13</xyz>
                     <limit>
                         <lower>-2</lower>
                         <upper>2</upper>
-                        <effort>100</effort>
+                        <effort>10</effort>
                         <velocity>100</velocity>
                     </limit>
                     <dynamics>
                         <spring_reference>0</spring_reference>
-                        <spring_stiffness>0</spring_stiffness>
+                        <spring_stiffness>100</spring_stiffness>
                     </dynamics>
                 </axis>
             </joint>

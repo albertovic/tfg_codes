@@ -13,6 +13,8 @@ int main()
 { 
     // creating socket 
     int clientSocket = socket(AF_INET, SOCK_STREAM, 0); 
+
+    bool continue_loop = true;
   
     // specifying address 
     sockaddr_in serverAddress; 
@@ -34,15 +36,19 @@ int main()
 
     // sending data 
     cout << "Bienvenido a la interfaz con Gazebo. Para ver los comandos utilice h" << endl;
-    while (true){
+    while (continue_loop){
         cout << "Escriba a continuación el comando: ";
         cin.getline(buffer, sizeof(buffer));
         transform(buffer, buffer + strlen(buffer), lower_buffer, ::tolower);
-        if (buffer[0] == 'h'){
+        if (buffer[0] == 'e'){
+            continue_loop = false;
+            send(clientSocket, lower_buffer, strlen(lower_buffer), 0);
+            cout << "Se ha cerrado el socket correctamente." << endl;
+        }
+        else if (buffer[0] == 'h'){
             cout << "--- Manual de comandos ---" << endl;
             cout << " c                   Para limpiar la pantalla." << endl;
-            cout << " p 1 <p1> <i1> <d1>  Para introducir los parámetros del nuevo PID 1" << endl;
-            cout << " p 2 <p2> <i2> <d2>  Para introducir los parámetros del nuevo PID 2" << endl;
+            cout << " e                   Para cerrar el socket." << endl;
             cout << " s                   Para mostrar la posición de cada iteración." << endl;
             cout << "                     Al mandarlo de nuevo se desactiva." << endl;
             cout << " t <pos1> <pos2>     Para introducir nuevas posiciones." << endl;
@@ -50,7 +56,7 @@ int main()
         else if (buffer[0] == 'c'){
             std::system("clear");
         }
-        else if(buffer[0] != 'c' && buffer[0] != 'p' && buffer[0] != 's' && buffer[0] != 't' && buffer[0] != 'h')
+        else if(buffer[0] != 'c' && buffer[0] != 's' && buffer[0] != 't' && buffer[0] != 'h')
             cout << "Por favor, escriba un comando válido." << endl;
         else
             send(clientSocket, lower_buffer, strlen(lower_buffer), 0);
