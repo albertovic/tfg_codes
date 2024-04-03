@@ -14,7 +14,7 @@
 
         <model name="fin_mechanism">
 
-            <!-- <plugin name="fin_mechanism_plugin" filename="libfin_mechanism_plugin.so">
+            <plugin name="fin_mechanism_plugin" filename="libfin_mechanism_plugin.so">
                 <proportional1>50.0</proportional1>
                 <integral1>0.0</integral1>
                 <derivative1>1.0</derivative1>
@@ -24,7 +24,7 @@
                 <integral2>0.1</integral2>
                 <derivative2>1.0</derivative2>
                 <target2>0.0</target2>
-            </plugin>/> -->
+            </plugin>/>
 
             <pose relative_to='world'>0 0 0 0 0 0</pose>
 
