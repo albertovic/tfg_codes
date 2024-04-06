@@ -14,7 +14,7 @@
 
         <model name="fin_mechanism">
             
-            <plugin name="fin_mechanism_plugin" filename="libfin_mechanism_plugin.so">
+            <plugin name="fin_mechanism_plugi_gui" filename="libfin_mechanism_plugin_gui.so">
                 <proportional1>1.0</proportional1>
                 <integral1>0.0</integral1>
                 <derivative1>0.0</derivative1>
