@@ -18,7 +18,6 @@ int main()
   
     // specifying address 
     sockaddr_in serverAddress; 
-    // INET is basically 127.0.0.1
     serverAddress.sin_family = AF_INET; 
     serverAddress.sin_port = htons(8080); 
     serverAddress.sin_addr.s_addr = INADDR_ANY; 

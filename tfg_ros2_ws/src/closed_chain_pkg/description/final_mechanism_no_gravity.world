@@ -15,14 +15,14 @@
         <model name="fin_mechanism">
             
             <plugin name="fin_mechanism_plugin" filename="libfin_mechanism_plugin.so">
-                <proportional1>50.0</proportional1>
+                <proportional1>1.0</proportional1>
                 <integral1>0.0</integral1>
-                <derivative1>1.0</derivative1>
+                <derivative1>0.0</derivative1>
                 <target1>0.0</target1>
 
-                <proportional2>200.0</proportional2>
-                <integral2>0.1</integral2>
-                <derivative2>1.0</derivative2>
+                <proportional2>10.0</proportional2>
+                <integral2>1.0</integral2>
+                <derivative2>0.2</derivative2>
                 <target2>0.0</target2>
             </plugin>/>
 
@@ -356,7 +356,6 @@
                     <limit>
                         <lower>0</lower>
                         <upper>0.02</upper>
-                        <effort>100</effort>
                         <velocity>100</velocity>
                     </limit>
                     <dynamics>
@@ -529,5 +528,3 @@
         </model>
     </world>
 </sdf>
-
-  
