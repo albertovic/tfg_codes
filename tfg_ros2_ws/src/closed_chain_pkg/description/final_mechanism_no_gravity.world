@@ -20,8 +20,8 @@
                 <derivative1>0.2</derivative1>
                 <target1>0.0</target1>
 
-                <proportional2>1.0</proportional2>
-                <integral2>0.0</integral2>
+                <proportional2>10.0</proportional2>
+                <integral2>0.2</integral2>
                 <derivative2>0.2</derivative2>
                 <target2>0.0</target2>
             </plugin>/>

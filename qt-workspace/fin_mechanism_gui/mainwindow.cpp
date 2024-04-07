@@ -15,12 +15,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_btnOnOff_clicked()
-{
-
-}
-
-
 void MainWindow::on_btnCnct_clicked()
 {
     ui->txtFeedBack->clear();

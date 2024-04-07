@@ -16,12 +16,12 @@
             
             <plugin name="fin_mechanism_plugin_gui" filename="libfin_mechanism_plugin_gui.so">
                 <proportional1>50.0</proportional1>
-                <integral1>0.1</integral1>
+                <integral1>0.0</integral1>
                 <derivative1>1.0</derivative1>
                 <target1>0.0</target1>
 
                 <proportional2>50.0</proportional2>
-                <integral2>0.1</integral2>
+                <integral2>0.0</integral2>
                 <derivative2>1.0</derivative2>
                 <target2>0.0</target2>
             </plugin>/>

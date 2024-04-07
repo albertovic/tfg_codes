@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>876</width>
-    <height>577</height>
+    <width>879</width>
+    <height>333</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -78,136 +78,6 @@
      <string>Revolución 2</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>220</y>
-      <width>121</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Mostrar posición</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnOnOff">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>280</y>
-      <width>71</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>ON/OFF</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="txtPosRev1">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>130</y>
-      <width>81</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="txtPosRev2">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>130</y>
-      <width>81</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>80</y>
-      <width>91</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Posición</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>100</y>
-      <width>91</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Revolución 1</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_6">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>100</y>
-      <width>91</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Revolución 2</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>80</y>
-      <width>91</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Posición</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_8">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>240</y>
-      <width>121</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>constantemente</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnActPos">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>280</y>
-      <width>141</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Actualizar Posición</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="txtTargRev2">
     <property name="geometry">
      <rect>
@@ -237,9 +107,9 @@
    <widget class="QLineEdit" name="txtFeedBack">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>370</y>
-      <width>791</width>
+      <x>100</x>
+      <y>220</y>
+      <width>681</width>
       <height>71</height>
      </rect>
     </property>
@@ -250,8 +120,8 @@
    <widget class="QPushButton" name="btnCnct">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>490</y>
+      <x>400</x>
+      <y>100</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -263,8 +133,8 @@
    <widget class="QPushButton" name="btnClose">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>490</y>
+      <x>630</x>
+      <y>100</y>
       <width>141</width>
       <height>41</height>
      </rect>

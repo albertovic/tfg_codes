@@ -23,8 +23,6 @@ public:
     void typeFeedback(QString);
 
 private slots:
-    void on_btnOnOff_clicked();
-
     void on_btnCnct_clicked();
 
     void on_btnClose_clicked();
