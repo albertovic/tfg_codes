@@ -48,13 +48,23 @@ void MainWindow::on_btnClose_clicked()
 void MainWindow::readyRead(){
     QByteArray message;
     message = mySocket->readAll();
-    // TODO: Aquí gestionar la forma de actuar dependiendo del mensaje.
-    /**
-     * Si el mensaje empieza por t -> Mandar el mensaje a la caja de texto.
-     *
-     */
-    if(message[0] == 't'){
 
+    switch (message[0]) {
+    case 't':{
+        // Eliminamos los dos primeros bytes para eliminar la "t " de antes del mensaje.
+        if(message.size() >= 2){
+            message.remove(0, 2);
+            message.replace('\0', "");
+        }
+        qDebug(message);
+
+        QString messageAsString = QString(message);
+        // Mandamos el mensaje al feedback text
+        ui->txtFeedBack->setText(messageAsString);
+    }
+        break;
+    default:
+        break;
     }
 }
 
