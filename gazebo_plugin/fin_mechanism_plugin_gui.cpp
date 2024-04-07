@@ -112,7 +112,7 @@ namespace gazebo
                 this->rev1->GetScopedName(), target1);
 
             this->model->GetJointController()->SetPositionPID(
-                this->rev1->GetScopedName(), this->pid2);
+                this->rev2->GetScopedName(), this->pid2);
 
             this->model->GetJointController()->SetPositionTarget(
                 this->rev2->GetScopedName(), target2);
