@@ -17,7 +17,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btnOnOff_clicked()
 {
-
+    if(mySocket->isWritable()){
+        QByteArray send_message;
+        QString str_value = "s";
+        send_message = str_value.toUtf8();
+        mySocket->write(send_message);
+        mySocket->waitForBytesWritten(2000);
+        qDebug("Mensaje mandado");
+    }
 }
 
 
@@ -47,14 +54,44 @@ void MainWindow::on_btnClose_clicked()
 
 void MainWindow::readyRead(){
     QByteArray message;
-    message = mySocket->readAll();
-    // TODO: Aquí gestionar la forma de actuar dependiendo del mensaje.
-    /**
-     * Si el mensaje empieza por t -> Mandar el mensaje a la caja de texto.
-     *
-     */
-    if(message[0] == 't'){
+    // char messageAsChar[1024];
+    // message = mySocket->readAll();
+    // std::vector<double> div_message;
+    QString messageAsString = QString(message);
 
+    switch(message[0]){
+    case 't':
+        // Eliminamos los dos primeros bytes para eliminar la "t " de antes del mensaje.
+        if(message.size() >= 2){
+            message.remove(0, 2);
+            message.replace('\0', "");
+        }
+        // Mandamos el mensaje al feedback text
+        ui->txtFeedBack->setText(messageAsString);
+        break;
+    // case 'p':
+    //     if(message.size() >= 2){
+    //         message.remove(0, 2);
+    //         message.replace('\0', "");
+    //     }
+    //     // Copiamos la información del mensaje y lo transformamos en un array de char
+    //     memcpy(messageAsChar, message.constData(), message.size());
+    //     // Utilizamos la función para dividir el mensaje
+
+    //     while (ss >> parte)
+    //     { // Leemos cada parte del stringstream
+    //         double valor;
+    //         if (std::istringstream(parte) >> valor)
+    //         { // Intentamos convertir la parte en un double
+    //             // Si la conversión es exitosa, agregamos el valor al vector resultado
+    //             div_message.push_back(valor);
+    //         }
+    //     }
+
+    //     ui->txtPosRev1->setText(QString::number(div_message[0]));
+    //     ui->txtPosRev2->setText(QString::number(div_message[1]));
+    default:
+        break;
     }
 }
 
@@ -103,4 +140,3 @@ void MainWindow::on_sliderPos2_valueChanged(int value)
         mySocket->waitForBytesWritten(2000);
     }
 }
-

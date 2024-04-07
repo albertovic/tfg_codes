@@ -130,6 +130,7 @@ namespace gazebo
                 std::cout << this->rev2->GetName() << " position is: " << this->rev2->Position(0) << std::endl;
             }
 
+
             // Configuración del socket
             fd_set readfds;
             FD_ZERO(&readfds);

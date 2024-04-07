@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QTcpSocket>
+#include <iostream>
+#include <vector>
+#include <sstream>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

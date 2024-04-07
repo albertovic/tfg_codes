@@ -125,9 +125,20 @@ namespace gazebo
             // Activa o desactiva la impresión de las posiciones en pantalla de forma constante
             if (show_positions)
             {
-                std::system("clear");
-                std::cout << this->rev1->GetName() << " position is: " << this->rev1->Position(0) << std::endl;
-                std::cout << this->rev2->GetName() << " position is: " << this->rev2->Position(0) << std::endl;
+                // TODO: Hacer que mande la posición cada 1 segundo mediante el socket.
+                // std::system("clear");
+                // std::cout << this->rev1->GetName() << " position is: " << this->rev1->Position(0) << std::endl;
+                // std::cout << this->rev2->GetName() << " position is: " << this->rev2->Position(0) << std::endl;
+                
+                std::string return_str;
+                return_str = "p ";
+                return_str += std::to_string(this->rev1->Position(0));
+                return_str += " ";
+                return_str += std::to_string(this->rev2->Position(0));
+                strncpy(return_message, return_str.c_str(), sizeof(return_message)); // Copiar cadena a arreglo de caracteres
+                return_message[sizeof(return_message) - 1] = '\0';
+
+                send(this->clientSocket, this->return_message, sizeof(this->return_message), 0);
             }
 
             // Configuración del socket
@@ -154,7 +165,7 @@ namespace gazebo
                 switch (buffer[0]){
                     case 't':
                     {
-
+                        
                         // El cambio aquí es que se separa entre el PID 1 y el 2
                         // Primero se divide el mensaje con el método ya creado
                         std::vector<double> mensaje_div = dividirMensaje(buffer);
@@ -163,27 +174,53 @@ namespace gazebo
                         if (buffer[1] == '1'){
                             int pid1_ok = this->model->GetJointController()->SetPositionTarget(
                                 this->rev1->GetScopedName(), mensaje_div[0]);
-                            // TODO: Realizar comprobación de correcto establecimiento del PID1
+                            
+                            if (pid1_ok == 1){
+                                std::string return_str;
+                                return_str = "t Se ha establecido el target del PID 1 correctamente.";
+                                return_str += "  PID 1: "; 
+                                return_str += std::to_string(mensaje_div[0]);
+                                // std::cout << return_str << std::endl;
+                                strncpy(return_message, return_str.c_str(), sizeof(return_message)); // Copiar cadena a arreglo de caracteres
+                                return_message[sizeof(return_message) - 1] = '\0';
+
+                                send(this->clientSocket, this->return_message, sizeof(this->return_message), 0);
+                            }
+                            else{  
+                                std::string return_str;
+                                return_str = "t Ha habido un error al establecer el target del PID 1.";
+                                // std::cout << return_str << std::endl;
+                                strncpy(return_message, return_str.c_str(), sizeof(return_message)); // Copiar cadena a arreglo de caracteres
+                                return_message[sizeof(return_message) - 1] = '\0';
+
+                                send(this->clientSocket, this->return_message, sizeof(this->return_message), 0);
+                            }
+
                         }else if (buffer[1] == '2'){
                             int pid2_ok = this->model->GetJointController()->SetPositionTarget(
                                 this->rev2->GetScopedName(), mensaje_div[0]);
-                            // TODO: Realizar comprobación de correcto establecimiento del PID2
-                        }
-                        
 
-                        // if ((pid1_ok == 1) && (pid2_ok == 1))
-                        // {
-                        //     std::cout << "Se han establecido los target de los PID correctamente." << std::endl;
-                        //     std::cout << "Los valores son: " << std::endl;
-                        //     std::cout << "  PID 1: " << mensaje_div[0] << std::endl;
-                        //     std::cout << "  PID 2: " << mensaje_div[1] << std::endl;
-                        // }
-                        // else
-                        // {
-                        //     std::cerr << "Error al establecer los valores de los PID." << std::endl;
-                        //     std::cerr << "  El PID 1 ha devuelto: " << pid1_ok << std::endl;
-                        //     std::cerr << "  El PID 2 ha devuelto: " << pid2_ok << std::endl;
-                        // }
+                            if (pid2_ok == 1){
+                                std::string return_str;
+                                return_str = "t Se ha establecido el target del PID 2 correctamente.";
+                                return_str += "  PID 2: ";
+                                return_str += std::to_string(mensaje_div[0]);
+                                // std::cout << return_str << std::endl;
+                                strncpy(return_message, return_str.c_str(), sizeof(return_message)); // Copiar cadena a arreglo de caracteres
+                                return_message[sizeof(return_message) - 1] = '\0';
+
+                                send(this->clientSocket, this->return_message, sizeof(this->return_message), 0);
+                            }
+                            else{  
+                                std::string return_str;
+                                return_str = "t Ha habido un error al establecer el target del PID 2.";
+                                // std::cout << return_str << std::endl;
+                                strncpy(return_message, return_str.c_str(), sizeof(return_message)); // Copiar cadena a arreglo de caracteres
+                                return_message[sizeof(return_message) - 1] = '\0';
+
+                                send(this->clientSocket, this->return_message, sizeof(this->return_message), 0);
+                            }
+                        }
                     }
                         break;
                     case 's':
@@ -241,6 +278,7 @@ namespace gazebo
         int serverSocket;
         int clientSocket;
         char buffer[1024] = {0};
+        char return_message[1024] = {0};
 
         // Commands
         bool show_positions = false;
