@@ -56,7 +56,6 @@ void MainWindow::readyRead(){
             message.remove(0, 2);
             message.replace('\0', "");
         }
-        qDebug(message);
 
         QString messageAsString = QString(message);
         // Mandamos el mensaje al feedback text

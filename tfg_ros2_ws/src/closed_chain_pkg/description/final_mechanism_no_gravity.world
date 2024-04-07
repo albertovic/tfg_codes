@@ -17,11 +17,11 @@
             <plugin name="fin_mechanism_plugi_gui" filename="libfin_mechanism_plugin_gui.so">
                 <proportional1>1.0</proportional1>
                 <integral1>0.0</integral1>
-                <derivative1>0.0</derivative1>
+                <derivative1>0.2</derivative1>
                 <target1>0.0</target1>
 
-                <proportional2>10.0</proportional2>
-                <integral2>1.0</integral2>
+                <proportional2>1.0</proportional2>
+                <integral2>0.0</integral2>
                 <derivative2>0.2</derivative2>
                 <target2>0.0</target2>
             </plugin>/>
@@ -252,7 +252,7 @@
                 <parent>base_link</parent>
                 <child>input_bar_2_1</child>
                 <axis>
-                    <xyz>0 -1 0</xyz>
+                    <xyz>0 1 0</xyz>
                     <limit>
                         <lower>-inf</lower>
                         <upper>inf</upper>
