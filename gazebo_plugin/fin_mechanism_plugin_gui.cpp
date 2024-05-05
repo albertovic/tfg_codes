@@ -8,7 +8,6 @@
 #include <vector>
 #include <sstream>
 
-// Includes for the socket
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -25,14 +24,15 @@ namespace gazebo
         void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
         {
             std::cout << "Es necesario hacer conexión con el cliente antes de continuar." << std::endl;
-            // Create the server socket
+            // Creación del socket
             this->serverSocket = socket(AF_INET, SOCK_STREAM, 0);
-            // Datatype used for storing the address of the socket
+
+            // Creación de las variables para almacenar la información de la dirección de conexión
             sockaddr_in serverAdress;
             serverAdress.sin_family = AF_INET;
-            // This function converts the unsigned int from machine byte order to network byte order
+
             serverAdress.sin_port = htons(8080);
-            // We do not want to bind the socket to a particular IP address, just listen to all the available IPs
+            // No hacemos el bind a una IP concreta, sino que se escuchan a todas las IP disponibiles
             serverAdress.sin_addr.s_addr = INADDR_ANY;
             bind(this->serverSocket, (struct sockaddr *)&serverAdress, sizeof(serverAdress));
 
@@ -49,7 +49,7 @@ namespace gazebo
                 exit(0);
             }
 
-            // Create the parameters as variables:
+            // Creación de las variables para los parámetros:
             double proportional1 = 0;
             double integral1 = 0;
             double derivative1 = 0;
@@ -60,7 +60,7 @@ namespace gazebo
             double derivative2 = 0;
             double target2 = 0;
 
-            // Get the plugin parameters:
+            // Obtención de los parámetros del plugin:
 
             if (_sdf->HasElement("proportional1"))
                 proportional1 = _sdf->Get<double>("proportional1");
@@ -86,7 +86,7 @@ namespace gazebo
             if (_sdf->HasElement("target2"))
                 target2 = _sdf->Get<double>("target2");
 
-            // Store the pointer to the model
+            // Variable para guardar el puntero al modelo
             this->model = _model;
             this->baseLink = model->GetLinks()[0];
 
@@ -97,8 +97,6 @@ namespace gazebo
 
             std::cerr << "Los joints de entrada se llaman: " << this->rev1->GetName() << " y " << this->rev2->GetName() << std::endl;
 
-            // Listen to the update event. This event is broadcast every
-            // simulation iteration.
             this->updateConnection = event::Events::ConnectWorldUpdateBegin(
                 std::bind(&ModelPush::OnUpdate, this));
 
@@ -118,7 +116,6 @@ namespace gazebo
                 this->rev2->GetScopedName(), target2);
         }
 
-        // Called by the world update start event
     public:
         void OnUpdate()
         {
@@ -149,17 +146,25 @@ namespace gazebo
 
             if (ready > 0 && FD_ISSET(this->clientSocket, &readfds))
             {
+                // Se iinicializa a 0 el buffer antes de realizar la lectura para evitar restos de valores anteriores
+                memset(buffer, 0, sizeof(buffer));
+
                 recv(this->clientSocket, this->buffer, sizeof(this->buffer), 0);
+
+                std::cout << buffer << std::endl;
 
                 switch (buffer[0]){
                     case 't':
                     {
 
                         // El cambio aquí es que se separa entre el PID 1 y el 2
-                        // Primero se divide el mensaje con el método ya creado
-                        std::vector<double> mensaje_div = dividirMensaje(buffer);
+                        // Primero se limpia el vector de los datos anteriores
+                        // Y a continuación se divide el mensaje con el método ya creado
+                        std::vector<double> mensaje_div;
+                        mensaje_div.clear();
+                        mensaje_div = dividirMensaje(buffer);
 
-                        // Y luego se filtra dependiendo del segundo número del mensaje y se 
+                        // Luego se filtra dependiendo del segundo número del mensaje y se actúa en consecuencia
                         if (buffer[1] == '1'){
                             int pid1_ok = this->model->GetJointController()->SetPositionTarget(
                                 this->rev1->GetScopedName(), mensaje_div[0]);
@@ -229,15 +234,15 @@ namespace gazebo
         std::vector<double> dividirMensaje(const char *mensaje)
         {
             std::vector<double> resultado;
-            std::stringstream ss(mensaje); // Creamos un stringstream con el mensaje
+            std::stringstream ss(mensaje); // Se crea un stringstream con el mensaje
 
             std::string parte;
             while (ss >> parte)
-            { // Leemos cada parte del stringstream
+            { // Se lee cada parte del stringstream
                 double valor;
                 if (std::istringstream(parte) >> valor)
-                { // Intentamos convertir la parte en un double
-                    // Si la conversión es exitosa, agregamos el valor al vector resultado
+                { // Se intenta convertir la parte en un double
+                    // Si la conversión es exitosa, se agrega el valor al vector resultado
                     resultado.push_back(valor);
                 }
             }
@@ -246,21 +251,21 @@ namespace gazebo
         }
 
     private:
-        // Pointer to the model
+        // Puntero al modelo
         physics::ModelPtr model;
 
-        // Pointer to the base link
+        // Puntero al link base
         physics::LinkPtr baseLink;
 
-        // Pointers to the joints
+        // Punteros a las juntas o joints
         physics::JointPtr rev1;
         physics::JointPtr rev2;
 
-        /// A PID controller for the joint.
+        /// Punteros para los PID de las joints
         common::PID pid1;
         common::PID pid2;
 
-        // Pointer to the update event connection
+        // Puntero para el evento de actualización
         event::ConnectionPtr updateConnection;
 
         // Socket
@@ -269,10 +274,10 @@ namespace gazebo
         char buffer[1024] = {0};
         char return_message[1024] = {0};
 
-        // Commands
+        // Commandos
         bool show_positions = false;
     };
 
-    // Register this plugin with the simulator
+    // Registro del plugin para la simulación
     GZ_REGISTER_MODEL_PLUGIN(ModelPush)
 }
